@@ -36,7 +36,8 @@ class Team
     time_limit = Time.now.utc - 520.weeks
     return false if created_at > time_limit
 
-    true
+    #true
+    false
   end
 
   def trial_ends_at
@@ -162,49 +163,56 @@ class Team
   end
 
   def stripe_customer_text
-    "Customer since #{Time.at(stripe_customer.created).strftime('%B %d, %Y')}."
+    #"Customer since #{Time.at(stripe_customer.created).strftime('%B %d, %Y')}."
+    "Customer since tiger year"
   end
 
   def subscriber_text
     return unless subscribed_at
 
-    "Subscriber since #{subscribed_at.strftime('%B %d, %Y')}."
+    #"Subscriber since #{subscribed_at.strftime('%B %d, %Y')}."
+    "Subscriber since tiger year"
   end
 
   def stripe_customer_subscriptions_info(with_unsubscribe = false)
-    stripe_customer.subscriptions.map do |subscription|
-      amount = ActiveSupport::NumberHelper.number_to_currency(subscription.plan.amount.to_f / 100)
-      current_period_end = Time.at(subscription.current_period_end).strftime('%B %d, %Y')
-      [
-        "Subscribed to #{subscription.plan.name} (#{amount}), will#{subscription.cancel_at_period_end ? ' not' : ''} auto-renew on #{current_period_end}.",
-        !subscription.cancel_at_period_end && with_unsubscribe ? "Send `unsubscribe #{subscription.id}` to unsubscribe." : nil
-      ].compact.join("\n")
-    end
+    #stripe_customer.subscriptions.map do |subscription|
+    #  amount = ActiveSupport::NumberHelper.number_to_currency(subscription.plan.amount.to_f / 100)
+    #  current_period_end = Time.at(subscription.current_period_end).strftime('%B %d, %Y')
+    #  [
+    #    "Subscribed to #{subscription.plan.name} (#{amount}), will#{subscription.cancel_at_period_end ? ' not' : ''} auto-renew on #{current_period_end}.",
+    #    !subscription.cancel_at_period_end && with_unsubscribe ? "Send `unsubscribe #{subscription.id}` to unsubscribe." : nil
+    #  ].compact.join("\n")
+    #end
+    "Tiger Subscription Info"
   end
 
   def stripe_customer_invoices_info
-    stripe_customer.invoices.map do |invoice|
-      amount = ActiveSupport::NumberHelper.number_to_currency(invoice.amount_due.to_f / 100)
-      "Invoice for #{amount} on #{Time.at(invoice.date).strftime('%B %d, %Y')}, #{invoice.paid ? 'paid' : 'unpaid'}."
-    end
+    #stripe_customer.invoices.map do |invoice|
+    #  amount = ActiveSupport::NumberHelper.number_to_currency(invoice.amount_due.to_f / 100)
+    #  "Invoice for #{amount} on #{Time.at(invoice.date).strftime('%B %d, %Y')}, #{invoice.paid ? 'paid' : 'unpaid'}."
+    #end
+    "Tiger Invoice"
   end
 
   def stripe_customer_sources_info
-    stripe_customer.sources.map do |source|
-      "On file #{source.brand} #{source.object}, #{source.name} ending with #{source.last4}, expires #{source.exp_month}/#{source.exp_year}."
-    end
+    #stripe_customer.sources.map do |source|
+    #  "On file #{source.brand} #{source.object}, #{source.name} ending with #{source.last4}, expires #{source.exp_month}/#{source.exp_year}."
+    #end
+    "Tiger file"
   end
 
   def active_stripe_subscription?
-    !active_stripe_subscription.nil?
+    #!active_stripe_subscription.nil?
+    true
   end
 
   def active_stripe_subscription
-    return unless stripe_customer
+    #return unless stripe_customer
 
-    stripe_customer.subscriptions.detect do |subscription|
-      subscription.status == 'active' && !subscription.cancel_at_period_end
-    end
+    #stripe_customer.subscriptions.detect do |subscription|
+    #  subscription.status == 'active' && !subscription.cancel_at_period_end
+    #end
+    true
   end
 
   def tags
