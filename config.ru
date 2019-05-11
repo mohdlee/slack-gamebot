@@ -8,7 +8,7 @@ Bundler.require :default, ENV['RACK_ENV']
 require 'slack-ruby-bot-server'
 require 'slack-gamebot'
 
-NewRelic::Agent.manual_start
+# NewRelic::Agent.manual_start
 
 SlackRubyBotServer.configure do |config|
   config.server_class = SlackGamebot::Server

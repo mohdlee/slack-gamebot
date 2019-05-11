@@ -214,4 +214,4 @@ test:
 
 production:
   <<: *default_settings
-  monitor_mode: true
+  monitor_mode: false
