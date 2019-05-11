@@ -11,7 +11,7 @@ Re-install the bot at https://www.playplay.io. Your data will be purged in 2 wee
         deactivate_dead_teams!
         inform_dead_teams!
         check_subscribed_teams!
-        check_active_subscriptions_without_teams!
+        #check_active_subscriptions_without_teams!
       end
     end
 
