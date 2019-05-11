@@ -33,7 +33,7 @@ class Team
   def subscription_expired?
     return false if subscribed?
 
-    time_limit = Time.now.utc - 2.weeks
+    time_limit = Time.now.utc - 520.weeks
     return false if created_at > time_limit
 
     true
@@ -42,7 +42,7 @@ class Team
   def trial_ends_at
     raise 'Team is subscribed.' if subscribed?
 
-    created_at + 2.weeks
+    created_at + 520.weeks
   end
 
   def remaining_trial_days
@@ -53,7 +53,7 @@ class Team
 
   def trial_message
     [
-      remaining_trial_days.zero? ? 'Your trial subscription has expired.' : "Your trial subscription expires in #{remaining_trial_days} day#{remaining_trial_days == 1 ? '' : 's'}.",
+      remaining_trial_days.zero? ? 'You\'re expired.' : "You\'ll expire in #{remaining_trial_days} day#{remaining_trial_days == 1 ? '' : 's'}.",
       subscribe_text
     ].join(' ')
   end
@@ -68,11 +68,11 @@ class Team
   end
 
   def subscribe_text
-    "Subscribe your team for $29.99 a year at #{SlackRubyBotServer::Service.url}/subscribe?team_id=#{team_id}&game=#{game.name}."
+    "Subscribe your team for 99 Tiger Credit a year at #{SlackRubyBotServer::Service.url}/subscribe?team_id=#{team_id}&game=#{game.name}."
   end
 
   def update_cc_text
-    "Update your credit card info at #{SlackRubyBotServer::Service.url}/update_cc?team_id=#{team_id}&game=#{game.name}."
+    "Update your tiger card info at #{SlackRubyBotServer::Service.url}/update_cc?team_id=#{team_id}&game=#{game.name}."
   end
 
   def captains
